@@ -1,6 +1,6 @@
 namespace WineStore.ViewModels;
 
-public class WineViewModel
+public class WineViewModel : ViewModelBase
 {
     
 }
