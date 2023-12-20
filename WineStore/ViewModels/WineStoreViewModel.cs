@@ -1,4 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
+using DynamicData;
 using ReactiveUI;
 
 namespace WineStore.ViewModels;
@@ -7,9 +10,26 @@ public class WineStoreViewModel : ViewModelBase
 {
     public WineStoreViewModel()
     {
-        SearchResults.Add(new WineViewModel());
-        SearchResults.Add(new WineViewModel());
-        SearchResults.Add(new WineViewModel());
+        this.WhenAnyValue(x => x.SearchText)
+            .Throttle(TimeSpan.FromMilliseconds(400))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(DoSearch!);
+    }
+
+    private async void DoSearch(string s)
+    {
+        IsBusy = true;
+        SearchResults.Clear();
+        
+        if (string.IsNullOrWhiteSpace(s))
+        {
+            IsBusy = false;
+            return;
+        }
+        
+        // var results = await WineService.Search(s);
+        // SearchResults.AddRange(results.Select(x => new WineViewModel(x)));
+        // IsBusy = false;
     }
     
     private string? _searchText;
