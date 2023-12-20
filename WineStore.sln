@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineStore", "WineStore\WineStore.csproj", "{F607A638-6A73-441A-B2B1-AF6377C9FD81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F607A638-6A73-441A-B2B1-AF6377C9FD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F607A638-6A73-441A-B2B1-AF6377C9FD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F607A638-6A73-441A-B2B1-AF6377C9FD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F607A638-6A73-441A-B2B1-AF6377C9FD81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
