@@ -1,8 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
+using WineStore.Repository.Providers;
 
 namespace WineStore.ViewModels;
 
@@ -27,9 +29,10 @@ public class WineStoreViewModel : ViewModelBase
             return;
         }
         
-        // var results = await WineService.Search(s);
+        var results = await WineService.GetStoreWinesAsync();
+        
         // SearchResults.AddRange(results.Select(x => new WineViewModel(x)));
-        // IsBusy = false;
+        IsBusy = false;
     }
     
     private string? _searchText;

@@ -1,6 +1,8 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using WineStore.Repository;
+using WineStore.Repository.Providers;
 using WineStore.ViewModels;
 
 namespace WineStore;
