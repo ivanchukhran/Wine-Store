@@ -11,7 +11,7 @@ public class MainWindowViewModel : ViewModelBase
     public Interaction<WineStoreViewModel, WineViewModel?> ShowDialog { get; }
     public User User { get; set; }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(User user)
     {
         ShowDialog = new Interaction<WineStoreViewModel, WineViewModel?>();
         BuyWineCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -19,5 +19,6 @@ public class MainWindowViewModel : ViewModelBase
             var store = new WineStoreViewModel();
             var result = await ShowDialog.Handle(store);
         });
+        User = user;
     }
 }

@@ -7,19 +7,13 @@ namespace WineStore.Repository.Providers;
 
 public class UserService
 {
-    public static async Task<User> CreateAsync(string username, string password)
+    public static async void  CreateAsync(User user)
     {
-        var user = new User
-        {
-            Username = username,
-            Password = password
-        };
         using (var dbContext = new WineStoreDbContext())
         {
             await dbContext.Users.AddAsync(user);
             await dbContext.SaveChangesAsync();
         }
-        return user;
     }
     
     public static async Task<User?> GetUserAsync(int id)
@@ -30,11 +24,11 @@ public class UserService
         }
     }
     
-    public static async Task<User> GetUserAsync(string username, string password)
+    public static async Task<User?> GetUserAsync(string username)
     {
         using (var dbContext = new WineStoreDbContext())
         {
-            return await dbContext.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            return await dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
     }
 

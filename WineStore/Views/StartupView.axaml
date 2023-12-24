@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WineStore.Views.StartupView"
         xmlns:vm="clr-namespace:WineStore.ViewModels"
+        xmlns:views="clr-namespace:WineStore.Views"
         x:DataType="vm:StartupViewModel"
         Title="LoginView"
         TransparencyLevelHint="AcrylicBlur"
@@ -23,15 +24,17 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         <StackPanel Margin="10">
+            <!-- <views:RegisterControl /> -->
+            <!-- <views:LoginControl /> -->
 
             <TextBlock Text="Registration" FontWeight="Bold" />
-            <TextBox Watermark="Username" Text="{Binding Username}" />
-            <TextBox Watermark="Password" Text="{Binding Password}" />
-            <Button Content="Register" />
+            <TextBox Watermark="Username" Text="{Binding RegisterUsername}" />
+            <TextBox Watermark="Password" Text="{Binding RegisterPassword}" />
+            <Button Content="Register"  Command="{Binding Register}"/>
             <TextBlock Text="Login" FontWeight="Bold" Margin="0,10,0,0" />
-            <TextBox Watermark="Username" Text="{Binding Username}" />
-            <TextBox Watermark="Password" Text="{Binding Password}" />
-            <Button Content="Login" />
+            <TextBox Watermark="Username" Text="{Binding LoginUsername}" />
+            <TextBox Watermark="Password" Text="{Binding LoginPassword}" />
+            <Button Content="Login" Command="{Binding Login}"/>
         </StackPanel>
     </Panel>
 
