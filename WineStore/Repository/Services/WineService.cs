@@ -32,6 +32,13 @@ public class WineService
             await dbContext.SaveChangesAsync();
         }
     }
+    
+    public static async void AddRangeAsync(List<Wine> wines)
+    {
+        await using var dbContext = new WineStoreDbContext();
+        await dbContext.Wines.AddRangeAsync(wines);
+        await dbContext.SaveChangesAsync();
+    }
 
     public static async void RemoveWineAsync(Wine wine)
     {

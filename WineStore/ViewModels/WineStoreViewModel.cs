@@ -23,24 +23,30 @@ public class WineStoreViewModel : ViewModelBase
         IsBusy = true;
         SearchResults.Clear();
         
+        var results = await WineService.GetStoreWinesAsync();
+        
         if (string.IsNullOrWhiteSpace(s))
         {
             IsBusy = false;
+            SearchResults.AddRange(results.Select(x => new WineViewModel(x)));
             return;
         }
-        
-        var results = await WineService.GetStoreWinesAsync();
-        
-        // SearchResults.AddRange(results.Select(x => new WineViewModel(x)));
+
+        SearchResults.AddRange(results
+            .Where(x =>
+            x.Name.Contains(s, StringComparison.InvariantCultureIgnoreCase) ||
+            x.Description.Contains(s, StringComparison.InvariantCultureIgnoreCase))
+            .Select(x => new WineViewModel(x))
+        );
         IsBusy = false;
     }
-    
+
     private string? _searchText;
     private bool _isBusy;
     private WineViewModel? _selectedWine;
-    
+
     public ObservableCollection<WineViewModel> SearchResults { get; } = new();
-    
+
     public WineViewModel? SelectedWine
     {
         get => _selectedWine;

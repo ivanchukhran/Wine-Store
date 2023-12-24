@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using WineStore.Repository.Models;
+using WineStore.Repository.Providers;
 using WineStore.ViewModels;
 
 namespace WineStore.Views;
@@ -13,6 +16,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         InitializeComponent();
         this.WhenActivated(action => 
             action(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
+        
     }
     
     private async Task DoShowDialogAsync(InteractionContext<WineStoreViewModel, WineViewModel?> interaction)
