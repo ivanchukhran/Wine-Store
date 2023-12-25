@@ -6,14 +6,13 @@ namespace WineStore.Repository;
 
 public sealed class WineStoreDbContext : DbContext
 {
-    public DbSet<Wine> Wines { get; set; } = null!;
+    public DbSet<Wine?> Wines { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Country> Countries { get; set; } = null!;
     
     public WineStoreDbContext()
     {
         Database.EnsureCreated();
-        Console.WriteLine("Database created");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,6 +25,14 @@ public sealed class WineStoreDbContext : DbContext
         modelBuilder.Entity<Wine>().HasKey(w => w.Id);
         modelBuilder.Entity<User>().HasKey(u => u.Id);
         modelBuilder.Entity<Country>().HasKey(c => c.Id);
+
+        modelBuilder.Entity<Wine>()
+            .HasOne(w => w.User)
+            .WithMany(u => u.Wines);
         
+        modelBuilder.Entity<Country>()
+            .HasMany(c => c.Wines)
+            .WithOne(w => w.Country);
+
     }
 }

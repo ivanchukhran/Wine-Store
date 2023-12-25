@@ -13,5 +13,6 @@ public class WineViewModel : ViewModelBase
     
     public string Name => _wine.Name;
     public string Description => _wine.Description;
+    public string Country => _wine.Country!.Name;
     
 }

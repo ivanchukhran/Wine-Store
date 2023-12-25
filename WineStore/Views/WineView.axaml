@@ -4,15 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WineStore.Views.WineView"
-             Width="200">
+             xmlns:viewmodels="clr-namespace:WineStore.ViewModels"
+             x:DataType="viewmodels:WineViewModel"
+    Width="200">
     <StackPanel Spacing="5" Width="200">
-    <Border CornerRadius="10" ClipToBounds="True">
-        <Panel Background="#7FFF22DD">
-            <Image Width="200" Stretch="Uniform" />
-            <Panel Height="200">
-                <PathIcon Height="75" Width="75" Data="{StaticResource drink_coffee_regular}" />
+        <Border CornerRadius="10" ClipToBounds="True">
+            <Panel Background="#7FFF22DD">
+                <Image Width="200" Stretch="Uniform" />
+                <Panel Height="200">
+                    <PathIcon Height="75" Width="75" Data="{StaticResource drink_coffee_regular}" />
+                </Panel>
             </Panel>
-        </Panel>
-    </Border>    
-</StackPanel>
+        </Border>
+        <TextBlock Text="{Binding Name}"></TextBlock>
+        <TextBlock Text="{Binding Country}"></TextBlock>
+    </StackPanel>
 </UserControl>

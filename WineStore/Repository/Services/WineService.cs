@@ -9,7 +9,7 @@ namespace WineStore.Repository.Providers;
 
 public class WineService
 {
-    public static async void BuyWineAsync(Wine wine, int userId)
+    public static async void SetWineOwner(Wine wine, int userId)
     {
         using (var dbContext = new WineStoreDbContext())
         {
@@ -18,13 +18,18 @@ public class WineService
             {
                 return;
             }
-
-            wineFound.UserId = userId;
+            wineFound.User = await UserService.GetUserAsync(userId);
             await dbContext.SaveChangesAsync();
         }
     }
+    
+    public static async Task<Wine?> GetStoreWineAsync(string name)
+    {
+        await using var dbContext = new WineStoreDbContext();
+        return await dbContext.Wines.FirstOrDefaultAsync(w => w.Name == name && w.User == null);
+    }
 
-    public static async void AddWineAsync(Wine wine)
+    public static async void AddWineAsync(Wine? wine)
     {
         using (var dbContext = new WineStoreDbContext())
         {
@@ -55,19 +60,19 @@ public class WineService
         }
     }
 
-    public static async Task<List<Wine>> GetStoreWinesAsync()
+    public static async Task<List<Wine?>> GetStoreWinesAsync()
     {
         using (var dbContext = new WineStoreDbContext())
         {
-            return await dbContext.Wines.Where(w => w.UserId == null).ToListAsync();
+            return await dbContext.Wines.Where(w => w.User == null).ToListAsync();
         }
     }
 
-    public static async Task<List<Wine>> GetUserWinesAsync(int userId)
+    public static async Task<List<Wine?>> GetUserWinesAsync(int userId)
     {
         using (var dbContext = new WineStoreDbContext())
         {
-            return await dbContext.Wines.Where(w => w.UserId == userId).ToListAsync();
+            return await dbContext.Wines.Where(w => w.User != null && w.User.Id == userId).ToListAsync();
         }
     }
 }
